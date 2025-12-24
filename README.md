@@ -220,3 +220,168 @@ Fitur:
 - Pencarian data
 - Pagination
 - Hapus dan Edit data
+
+### b. Menambah Artikel
+File: module/artikel/tambah.php
+```php
+<?php
+$db = new Database();
+
+if (isset($_POST['submit'])) {
+    $judul = trim($_POST['judul']);
+    $isi   = trim($_POST['isi']);
+
+    if ($judul != '' && $isi != '') {
+
+        $sql = "INSERT INTO artikel (judul, isi) VALUES ('$judul', '$isi')";
+        $result = $db->query($sql);
+
+        if ($result) {
+            header("Location: index.php?mod=artikel&page=index");
+            exit;
+        } else {
+            echo "<p style='color:red;'>Gagal menyimpan data</p>";
+        }
+
+    } else {
+        echo "<p style='color:red;'>Judul dan isi wajib diisi</p>";
+    }
+}
+?>
+
+<h3>Tambah Artikel</h3>
+
+<form method="post" action="index.php?mod=artikel&page=tambah">
+    <table cellpadding="8" style="width:70%;">
+        <tr>
+            <td width="15%">Judul</td>
+            <td>
+                <input type="text" name="judul" required
+                       style="width:100%; padding:8px;">
+            </td>
+        </tr>
+        <tr>
+            <td>Isi</td>
+            <td>
+                <textarea name="isi" rows="10" required
+                          style="width:100%; padding:8px;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit" name="submit">Simpan</button>
+                <a href="index.php?mod=artikel&page=index" style="margin-left:10px;">
+                    Kembali
+                </a>
+            </td>
+        </tr>
+    </table>
+</form>
+```
+
+Fitur:
+- Input judul dan isi artikel
+- Menyimpan data ke database
+- Redirect ke halaman index setelah berhasil
+
+### c. Mengubah Artikel
+File: module/artikel/ubah.php
+```php
+<?php
+$db = new Database();
+
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+// Ambil data lama
+$data = $db->query("SELECT * FROM artikel WHERE id=$id")->fetch_assoc();
+
+if (isset($_POST['submit'])) {
+    $judul = $_POST['judul'];
+    $isi   = $_POST['isi'];
+
+    $sql = "UPDATE artikel SET judul='$judul', isi='$isi' WHERE id=$id";
+    $db->query($sql);
+
+    header("Location: index.php?mod=artikel&page=index");
+    exit;
+
+}
+?>
+
+<h3>Ubah Artikel</h3>
+
+<form method="post">
+    <table cellpadding="6">
+        <tr>
+            <td>Judul</td>
+            <td>
+                <input
+                    type="text"
+                    name="judul"
+                    value="<?= htmlspecialchars($data['judul']) ?>"
+                    required
+                    style="width:100%;"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>Isi</td>
+            <td>
+                <textarea name="isi" rows="6" required style="width:100%;"><?= htmlspecialchars($data['isi']) ?></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit" name="submit">Update</button>
+                <a href="/artikel/index">Kembali</a>
+            </td>
+        </tr>
+    </table>
+</form>
+```
+
+Fitur:
+- Menampilkan data berdasarkan ID
+- Mengubah judul dan isi artikel
+- Update data ke database
+
+### d. Menghapus Artikel
+Proses hapus dilakukan pada file index.php menggunakan parameter hapus.
+```php
+$db->query("DELETE FROM artikel WHERE id=$id");
+```
+
+## Langkah Penggunaan Aplikasi
+### 1) Menjalankan server menggunakan XAMPP.
+<img width="993" height="647" alt="image" src="https://github.com/user-attachments/assets/93b820d0-f3e3-4e26-8acf-02a3397b1eec" />
+
+### 2) Membuka browser dan mengakses aplikasi.
+<img width="1919" height="1062" alt="image" src="https://github.com/user-attachments/assets/0288aab4-9287-4821-9dfb-efeb6cbb71d7" />
+
+### 3) Masuk ke menu Artikel.
+<img width="1919" height="1140" alt="Screenshot 2025-12-24 131356" src="https://github.com/user-attachments/assets/f517175e-cf57-4db0-9174-a619cd38bf85" />
+
+### 4) Menambahkan artikel baru melalui tombol Tambah Artikel.
+![Uploading Screenshot 2025-12-24 133741.png…]()
+
+### 5) Mengedit artikel menggunakan tombol Edit.
+<img width="1919" height="1067" alt="image" src="https://github.com/user-attachments/assets/330f1e42-0460-4f0b-a87f-357b50c14924" />
+
+### 6) Menghapus artikel menggunakan tombol Hapus.
+<img width="1919" height="1063" alt="image" src="https://github.com/user-attachments/assets/c05a7275-a44a-40b6-a773-774148dcf839" />
+
+### 7) Menggunakan fitur pencarian dan pagination untuk mempermudah pencarian data.
+<img width="368" height="127" alt="image" src="https://github.com/user-attachments/assets/d44a08fe-2e74-4f8b-878a-d40b035496b2" />
+
+## Hasil Praktikum
+Hasil yang diperoleh dari praktikum ini adalah:
+- Sistem CRUD artikel berjalan dengan baik.
+- Data dapat ditambah, ditampilkan, diubah, dan dihapus.
+- Koneksi database berhasil menggunakan konsep OOP.
+- Routing aplikasi berjalan sesuai modul dan halaman.
+- Tampilan sederhana dan mudah digunakan.
+
+## Kesimpulan
+Aplikasi ini berhasil mengimplementasikan konsep Object Oriented Programming pada PHP, serta mengintegrasikan database MySQL untuk pengelolaan data artikel. Sistem telah dilengkapi dengan fitur CRUD, pencarian, dan pagination yang berjalan sesuai dengan kebutuhan praktikum.
