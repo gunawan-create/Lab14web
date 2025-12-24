@@ -1,5 +1,6 @@
 ## LAPORAN PRAKTIKUM 13
 Nama : Ali Gunawan | Kelas : TI.24.A.3 | NIM : 312410400
+
 ## TUJUAN PRAKTIKUM
 1. Menerapkan konsep Object Oriented Programming (OOP) pada PHP.
 
@@ -354,7 +355,7 @@ $db->query("DELETE FROM artikel WHERE id=$id");
 ```
 
 ## Langkah Penggunaan Aplikasi
-### 1) Menjalankan server menggunakan XAMPP.
+### 1) Menjalankan server menggunakan XAMPP
 <img width="993" height="647" alt="image" src="https://github.com/user-attachments/assets/93b820d0-f3e3-4e26-8acf-02a3397b1eec" />
 
 ### 2) Membuka browser dan mengakses aplikasi.
@@ -364,7 +365,7 @@ $db->query("DELETE FROM artikel WHERE id=$id");
 <img width="1919" height="1140" alt="Screenshot 2025-12-24 131356" src="https://github.com/user-attachments/assets/f517175e-cf57-4db0-9174-a619cd38bf85" />
 
 ### 4) Menambahkan artikel baru melalui tombol Tambah Artikel.
-![Uploading Screenshot 2025-12-24 133741.png…]()
+<img width="1919" height="1062" alt="Screenshot 2025-12-24 133741" src="https://github.com/user-attachments/assets/e108544e-5488-4be2-a081-fe476bf42a29" />
 
 ### 5) Mengedit artikel menggunakan tombol Edit.
 <img width="1919" height="1067" alt="image" src="https://github.com/user-attachments/assets/330f1e42-0460-4f0b-a87f-357b50c14924" />
