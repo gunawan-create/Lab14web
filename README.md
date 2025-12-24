@@ -31,3 +31,13 @@ Keterangan:
 - index.php : router utama aplikasi
 - module/artikel/ : modul pengelolaan data artikel
 - template/ : template tampilan header dan footer
+
+Struktur Database
+Database yang digunakan bernama lab12_php_oop dengan tabel artikel.
+```php
+CREATE TABLE artikel (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    judul VARCHAR(255) NOT NULL,
+    isi TEXT NOT NULL
+);
+```
